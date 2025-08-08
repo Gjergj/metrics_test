@@ -12,9 +12,10 @@ processors:
 exporters:
   prometheusremotewrite:
     endpoint: "http://victoriametrics:8428/api/v1/write"
-    namespace: "otel"
-    const_labels:
-      key1: "value1"
+    resource_to_telemetry_conversion:
+      enabled: true
+    tls:
+      insecure: true
 
 service:
   pipelines:
