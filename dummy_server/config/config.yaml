@@ -1,0 +1,95 @@
+receivers:
+  # otlp:
+  # protocols:
+  # grpc:
+  # http:
+  hostmetrics:
+    collection_interval: 10s # How often to collect metrics
+    scrapers:
+      cpu:
+      # memory:
+      # disk:
+      filesystem:
+        metrics:
+          system.filesystem.usage:
+            enabled: true
+      load:
+        metrics:
+          system.cpu.load_average.15m:
+            enabled: true
+          system.cpu.load_average.5m:
+            enabled: true
+          system.cpu.load_average.1m:
+            enabled: true
+      process:
+        mute_process_exe_error: true
+      processes:
+      memory:
+        # system.memory.usage:
+        #   enabled: true
+        # system.memory.usage.bytes:
+        #   enabled: true
+        # system.linux.memory.available:
+        #   enabled: true
+        # system.memory.utilization:
+        #   enabled: true
+        # system.memory.usage:
+        #   enabled: true
+      # network:
+      # process:
+processors:
+  batch:
+    send_batch_size: 1000
+    timeout: 10s
+  metricstransform/rename:
+    transforms:
+      # - include: ^cpu.*
+      #   match_type: regexp
+      #   action: update
+      #   new_name: hostmetrics_cpu_{name}
+      # - include: ^memory.*
+      #   match_type: regexp
+      #   action: update
+      #   new_name: hostmetrics_memory_{name}
+      # - include: ^disk.*
+      #   match_type: regexp
+      #   action: update
+      #   new_name: hostmetrics_disk_{name}
+      # - include: ^filesystem.*
+      #   match_type: regexp
+      #   action: update
+      #   new_name: hostmetrics_filesystem_{name}
+      # - include: ^network.*
+      #   match_type: regexp
+      #   action: update
+      #   new_name: hostmetrics_network_{name}
+      # - include: ^process.*
+      #   match_type: regexp
+      #   action: update
+      #   new_name: hostmetrics_process_{name}
+
+exporters:
+  customexporter:
+    endpoint: "http://localhost:8080"
+  otlp:
+    endpoint: "localhost:4317" # Replace with your backend endpoint
+    tls:
+      insecure: true # Use false for production with proper TLS
+
+service:
+  pipelines:
+    # traces:
+    # receivers: [otlp]
+    # receivers: []
+    # processors: [batch]
+    # exporters: [otlp]
+    metrics:
+      # receivers: [otlp]
+      receivers: [hostmetrics]
+      processors: [metricstransform/rename, batch]
+      exporters: [customexporter]
+    # logs:
+    #   # receivers: [otlp]
+    #   receivers: [hostmetrics]
+    #   processors: [batch]
+    #   exporters: [otlp]

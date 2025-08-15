@@ -27,8 +27,8 @@ download-deps:
 build_collector:
 	cd otelbuilder && \
 	builder --config=otelcol-builder.yaml && \
-	cp otelcol-custom/otelcol-custom ../ && \
-	rm -rf otelcol-custom
+	cp otelcol-custom/otelcol-custom ../ 
+
 
 # Clean target to remove downloaded files
 .PHONY: clean
