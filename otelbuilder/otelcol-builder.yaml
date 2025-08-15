@@ -1,21 +1,21 @@
 dist:
   name: otelcol-custom
   description: Local OpenTelemetry Collector binary
-  output_path: builder_output
+  output_path: /tmp/otelcol-custom
 exporters:
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/exporter/alibabacloudlogserviceexporter v0.129.0
-  - gomod: go.opentelemetry.io/collector/exporter/debugexporter v0.129.0
-  - gomod: github.com/Gjergj/metrics_test/custom_exporter v0.002
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/exporter/alibabacloudlogserviceexporter v0.132.0
+  - gomod: go.opentelemetry.io/collector/exporter/debugexporter v0.132.0
+  - gomod: github.com/Gjergj/metrics_test/custom_exporter v0.003
 
 receivers:
-  - gomod: go.opentelemetry.io/collector/receiver/otlpreceiver v0.129.0
+  - gomod: go.opentelemetry.io/collector/receiver/otlpreceiver v0.132.0
 
 processors:
-  - gomod: go.opentelemetry.io/collector/processor/batchprocessor v0.129.0
+  - gomod: go.opentelemetry.io/collector/processor/batchprocessor v0.132.0
 
 providers:
-  - gomod: go.opentelemetry.io/collector/confmap/provider/envprovider v1.35.0
-  - gomod: go.opentelemetry.io/collector/confmap/provider/fileprovider v1.35.0
-  - gomod: go.opentelemetry.io/collector/confmap/provider/httpprovider v1.35.0
-  - gomod: go.opentelemetry.io/collector/confmap/provider/httpsprovider v1.35.0
-  - gomod: go.opentelemetry.io/collector/confmap/provider/yamlprovider v1.35.0
+  - gomod: go.opentelemetry.io/collector/confmap/provider/envprovider v1.38.0
+  - gomod: go.opentelemetry.io/collector/confmap/provider/fileprovider v1.38.0
+  - gomod: go.opentelemetry.io/collector/confmap/provider/httpprovider v1.38.0
+  - gomod: go.opentelemetry.io/collector/confmap/provider/httpsprovider v1.38.0
+  - gomod: go.opentelemetry.io/collector/confmap/provider/yamlprovider v1.38.0
