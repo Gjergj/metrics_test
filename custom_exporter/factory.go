@@ -60,6 +60,6 @@ func createMetricsExporter(
 		exporterhelper.WithTimeout(c.TimeoutSettings),
 		exporterhelper.WithRetry(c.BackoffConfig),
 		exporterhelper.WithQueue(c.QueueSettings),
-		exporterhelper.WithStart()
+		exporterhelper.WithStart(exp.Start),
 	)
 }
