@@ -69,6 +69,8 @@ processors:
       #   new_name: hostmetrics_process_{name}
 
 exporters:
+  customexporter:
+    endpoint: localhost:8080
   otlp:
     endpoint: "localhost:4317" # Replace with your backend endpoint
     tls:
@@ -85,7 +87,7 @@ service:
       # receivers: [otlp]
       receivers: [hostmetrics]
       processors: [metricstransform/rename, batch]
-      exporters: [otlp]
+      exporters: [customexporter]
     # logs:
     #   # receivers: [otlp]
     #   receivers: [hostmetrics]
