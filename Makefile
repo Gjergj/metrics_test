@@ -22,6 +22,14 @@ download-deps:
 		exit 1; \
 	fi
 
+# Build custom collector target
+.PHONY: build_collector
+build_collector:
+	cd otelbuilder && \
+	builder --config=otelcol-builder.yaml && \
+	cp otelcol-custom/otelcol-custom ../ && \
+	rm -rf otelcol-custom
+
 # Clean target to remove downloaded files
 .PHONY: clean
 clean:
@@ -33,5 +41,6 @@ help:
 	@echo "Available targets:"
 	@echo "  all       - Download dependencies (default)"
 	@echo "  download-deps - Download OpenTelemetry Contrib"
+	@echo "  build_collector - Build custom collector from otelbuilder config"
 	@echo "  clean     - Remove downloaded files"
 	@echo "  help      - Show this help message"

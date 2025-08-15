@@ -1,11 +1,11 @@
 dist:
   name: otelcol-custom
   description: Local OpenTelemetry Collector binary
-  output_path: /tmp/otelcol-custom
+  output_path: otelcol-custom
 exporters:
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/exporter/alibabacloudlogserviceexporter v0.132.0
   - gomod: go.opentelemetry.io/collector/exporter/debugexporter v0.132.0
-  - gomod: github.com/Gjergj/metrics_test/custom_exporter v0.003
+  - gomod: github.com/Gjergj/metrics_test/custom_exporter v0.004
 
 receivers:
   - gomod: go.opentelemetry.io/collector/receiver/otlpreceiver v0.132.0

@@ -1,3 +1,4 @@
 # OpenTelemetry Contrib
 deps/
 otelcol-contrib*
+otelcol-custom*
