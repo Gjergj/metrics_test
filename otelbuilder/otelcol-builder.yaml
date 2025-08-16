@@ -5,9 +5,11 @@ dist:
 exporters:
   - gomod: go.opentelemetry.io/collector/exporter/otlpexporter v0.132.0
   - gomod: go.opentelemetry.io/collector/exporter/otlphttpexporter v0.132.0
-  # - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/exporter/alibabacloudlogserviceexporter v0.132.0
   - gomod: go.opentelemetry.io/collector/exporter/debugexporter v0.132.0
   - gomod: github.com/Gjergj/metrics_test/custom_exporter v0.004
+
+extensions:
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/extension/basicauthextension v0.132.0
 
 receivers:
   - gomod: go.opentelemetry.io/collector/receiver/otlpreceiver v0.132.0

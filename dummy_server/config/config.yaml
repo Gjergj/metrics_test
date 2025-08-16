@@ -68,7 +68,31 @@ processors:
       #   action: update
       #   new_name: hostmetrics_process_{name}
 
+extensions:
+  basicauth/client:
+    client_auth: 
+      username: username
+      password: password
+
 exporters:
+  otlphttp:
+    auth:
+      authenticator: basicauth/client
+    endpoint: "http://localhost:8080"
+    compression: ""
+    metrics_endpoint: "http://localhost:8080/v1/metrics"
+    headers:
+      Authorization: "Bearer your_api_token"
+    timeout: 10s
+    sending_queue:
+      queue_size: 512
+      num_consumers: 4
+    retry_on_failure:
+      enabled: true
+      initial_interval: 5s
+      max_interval: 30s
+      max_elapsed_time: 5m
+    encoding: "json"
   customexporter:
     endpoint: "http://localhost:8080"
   otlp:
@@ -77,6 +101,7 @@ exporters:
       insecure: true # Use false for production with proper TLS
 
 service:
+  extensions: [basicauth/client]
   pipelines:
     # traces:
     # receivers: [otlp]
@@ -87,7 +112,7 @@ service:
       # receivers: [otlp]
       receivers: [hostmetrics]
       processors: [metricstransform/rename, batch]
-      exporters: [customexporter]
+      exporters: [otlphttp]
     # logs:
     #   # receivers: [otlp]
     #   receivers: [hostmetrics]
